@@ -38,5 +38,5 @@ local lspconfig = require("lspconfig")
 local coq = require("coq")
 lspconfig.lua_ls.setup( coq.lsp_ensure_capabilities({ on_attach = on_attach }))
 lspconfig.clangd.setup( coq.lsp_ensure_capabilities({ on_attach = on_attach }))
-lspconfig.cmake.setup{}
-lspconfig.pylsp.setup{}
+lspconfig.cmake.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach })}
+lspconfig.pylsp.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach })}
