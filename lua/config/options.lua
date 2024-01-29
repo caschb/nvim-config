@@ -29,3 +29,4 @@ options.encoding = 'utf-8'
 options.swapfile = false
 
 options.termguicolors = true
+options.clipboard = 'unnamedplus'
