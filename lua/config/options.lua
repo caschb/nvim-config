@@ -30,4 +30,4 @@ options.swapfile = false
 
 options.termguicolors = true
 options.clipboard = 'unnamedplus'
-vim.cmd( 'colorscheme elflord')
+vim.cmd('colorscheme elflord')
