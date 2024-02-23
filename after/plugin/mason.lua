@@ -35,6 +35,7 @@ local on_attach = function(client, bufnr)
 end
 
 local lspconfig = require("lspconfig")
+vim.g.coq_settings = { auto_start = "shut-up" }
 local coq = require("coq")
 lspconfig.lua_ls.setup{
   coq.lsp_ensure_capabilities({ on_attach = on_attach }),
