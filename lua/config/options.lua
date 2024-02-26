@@ -30,4 +30,6 @@ options.swapfile = false
 
 options.termguicolors = true
 options.clipboard = 'unnamedplus'
+options.foldmethod = "syntax"
+options.foldexpr = "nvim_treesitter#foldexpr()"
 vim.cmd('colorscheme elflord')
