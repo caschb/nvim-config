@@ -71,3 +71,4 @@ lspconfig.lua_ls.setup{
 lspconfig.clangd.setup( coq.lsp_ensure_capabilities({ on_attach = on_attach }))
 lspconfig.cmake.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach })}
 lspconfig.pylsp.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach })}
+lspconfig.texlab.setup{ coq.lsp_ensure_capabilities({ on_attach = on_attach })}
