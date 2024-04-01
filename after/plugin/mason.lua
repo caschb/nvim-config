@@ -73,3 +73,4 @@ lspconfig.cmake.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
 lspconfig.pylsp.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
 lspconfig.texlab.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
 lspconfig.elixirls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
+lspconfig.rust_analyzer.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
