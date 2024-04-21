@@ -14,31 +14,35 @@ keymap.set('n', '[d', diag.goto_prev, opts)
 keymap.set('n', ']d', diag.goto_next, opts)
 keymap.set('n', '<leader>q', diag.setloclist, opts)
 
-local on_attach = function(client, bufnr)
+local custom_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  keymap.set('n', 'gD', lsp.buf.declaration, bufopts)
-  keymap.set('n', 'gd', lsp.buf.definition, bufopts)
-  keymap.set('n', 'K', lsp.buf.hover, bufopts)
-  keymap.set('n', 'gi', lsp.buf.implementation, bufopts)
-  keymap.set('n', '<C-k>', lsp.buf.signature_help, bufopts)
-  keymap.set('n', '<leader>wa', lsp.buf.add_workspace_folder, bufopts)
-  keymap.set('n', '<leader>wr', lsp.buf.remove_workspace_folder, bufopts)
-  keymap.set('n', '<leader>wl', function()
-    print(vim.inspect(lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  keymap.set('n', '<leader>D', lsp.buf.type_definition, bufopts)
-  keymap.set('n', '<leader>rn', lsp.buf.rename, bufopts)
-  keymap.set('n', '<leader>ca', lsp.buf.code_action, bufopts)
-  keymap.set('n', 'gr', lsp.buf.references, bufopts)
-  keymap.set('n', '<leader>f', lsp.buf.formatting, bufopts)
+  local wk = require("which-key")
+  print("Hi!")
+  wk.register({
+    ['gD'] = { lsp.buf.declaration, "Go to declaration" },
+    ['gd'] = { lsp.buf.definition, "Go to definition" },
+    ['K'] = { lsp.buf.hover, "Hover" },
+    ['gi'] = { lsp.buf.implementation, "Go to implementation" },
+    ['gr'] = { lsp.buf.references, "Go to references" },
+    ['<C-k>'] = { lsp.buf.signature_help, "Help" },
+    ['<leader>wa'] = { lsp.buf.add_workspace_folder, "Add workspace folder" },
+    ['<leader>wr'] = { lsp.buf.remove_workspace_folder, "Remove workspace folder" },
+    ['<leader>wl'] = { function()
+      print(vim.inspect(lsp.buf.list_workspace_folders()))
+    end, "List workspace folder" },
+    ['<leader>D'] = { lsp.buf.type_definition, "Go to type definition" },
+    ['<leader>rn'] = { lsp.buf.rename, "Rename symbol" },
+    ['<leader>ca'] = { lsp.buf.code_action, "Code action" },
+    ['<leader>f'] = { lsp.buf.formatting, "Format" },
+  }, bufopts)
 end
 
 local lspconfig = require("lspconfig")
 vim.g.coq_settings = { auto_start = "shut-up" }
 local coq = require("coq")
 lspconfig.lua_ls.setup {
-  coq.lsp_ensure_capabilities({ on_attach = on_attach }),
+  coq.lsp_ensure_capabilities({ on_attach = custom_attach }),
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
@@ -68,9 +72,10 @@ lspconfig.lua_ls.setup {
     return true
   end
 }
-lspconfig.clangd.setup(coq.lsp_ensure_capabilities({ on_attach = on_attach }))
-lspconfig.cmake.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
-lspconfig.pylsp.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
-lspconfig.texlab.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
-lspconfig.elixirls.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
-lspconfig.rust_analyzer.setup { coq.lsp_ensure_capabilities({ on_attach = on_attach }) }
+vim.cmd('COQnow')
+lspconfig.clangd.setup { on_attach = custom_attach }
+lspconfig.cmake.setup { on_attach = custom_attach }
+lspconfig.pylsp.setup { on_attach = custom_attach }
+lspconfig.texlab.setup { on_attach = custom_attach }
+lspconfig.elixirls.setup { on_attach = custom_attach }
+lspconfig.rust_analyzer.setup { on_attach = custom_attach }

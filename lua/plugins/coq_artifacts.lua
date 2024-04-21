@@ -1,3 +1,4 @@
 return ({
-  'ms-jpq/coq.artifacts'
+  'ms-jpq/coq.artifacts',
+  branch = 'artifacts',
 })
