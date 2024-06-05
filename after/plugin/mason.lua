@@ -79,3 +79,4 @@ lspconfig.pylsp.setup { on_attach = custom_attach }
 lspconfig.texlab.setup { on_attach = custom_attach }
 lspconfig.elixirls.setup { on_attach = custom_attach }
 lspconfig.rust_analyzer.setup { on_attach = custom_attach }
+lspconfig.julials.setup { on_attach = custom_attach }
